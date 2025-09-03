@@ -10,6 +10,8 @@ import jakarta.persistence.EntityManagerFactory;
 
 import java.util.List;
 
+import static app.services.Tasks.*;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -25,14 +27,11 @@ public class Main {
         loader.loadData();
 
 
-        // update course description
-        Course course = courseDAO.getById(1L);
-        course.setDescription("New Course description - boksning");
-        Course updatedCourse = courseDAO.update(course);
-        System.out.println(updatedCourse.getDescription() + ": updated with new description");
-
-
-
+        updateCourseDescription(courseDAO, 1L, "Boksning");
+        printStudentsByCourseId(studentDAO, 3L);
+        printCourseByStudentId(courseDAO, 1L);
+        printCoursesByTeacherId(courseDAO, 1L);
+        printStudentsByTeacherId(studentDAO, 1L);
 
         emf.close();
 

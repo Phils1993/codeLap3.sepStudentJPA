@@ -72,15 +72,14 @@ public class StudentDAO implements IDAO<Student, Long>{
         }
     }
 
-
-    public List<Student> getStudentsByCourseName(CourseName courseName) {
+    public List<Student> getStudentsByCourseId(Long courseId) {
         try (EntityManager em = emf.createEntityManager()) {
             TypedQuery<Student> query = em.createQuery(
-                    "SELECT s FROM Student s WHERE s.course.courseName = :courseName", Student.class);
-            query.setParameter("courseName", courseName);
+                    "SELECT s FROM Student s WHERE s.course.id = :courseId", Student.class);
+            query.setParameter("courseId", courseId);
             return query.getResultList();
         } catch (Exception ex) {
-            throw new RuntimeException("Error fetching students by course name", ex);
+            throw new RuntimeException("Error fetching students for course ID: " + courseId, ex);
         }
     }
 
@@ -94,6 +93,8 @@ public class StudentDAO implements IDAO<Student, Long>{
             throw new RuntimeException("Error fetching students for teacher ID: " + teacherId, ex);
         }
     }
+
+
 
 
 }
