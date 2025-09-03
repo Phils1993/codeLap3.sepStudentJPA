@@ -6,6 +6,9 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "student")
@@ -24,16 +27,39 @@ public class Student {
     private long id;
 
     @Column(name = "created_at")
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
-    @Column(nullable = false, unique = true, length = 100,name="email")
+    @Column(nullable = false, unique = true, length = 100, name = "email")
     private String email;
 
     @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(nullable = false, name = "updated_at")
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+
+    // relationer til course:
+    @ManyToOne
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Course course;
+
+
+    @PrePersist
+    public void prePersist() {
+        this.createdAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    void preUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    // Hjælpe metoder:
+
+    public void addStudent(Course course) {
+        this.course = course;
+    }
 
 }
