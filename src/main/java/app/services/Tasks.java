@@ -16,13 +16,13 @@ public class Tasks {
             Course updatedCourse = courseDAO.update(course);
             System.out.println(updatedCourse.getDescription() + ": updated with new description");
         } else {
-            System.out.println("⚠️ Course not found with ID: " + courseId);
+            System.out.println(" Course not found with ID: " + courseId);
         }
     }
 
     public static void printStudentsByCourseId(StudentDAO studentDAO, Long courseId) {
         List<Student> students = studentDAO.getStudentsByCourseId(courseId);
-        System.out.println("👨‍🎓 Students enrolled in course ID " + courseId + ":");
+        System.out.println(" Students enrolled in course ID " + courseId + ":");
         students.forEach(s -> System.out.println(" - " + s.getName()));
     }
 
@@ -31,20 +31,20 @@ public class Tasks {
         if (course != null) {
             System.out.println("Student is enrolled in: " + course.getCourseName());
         } else {
-            System.out.println("⚠️ No course found for student ID: " + studentId);
+            System.out.println(" No course found for student ID: " + studentId);
         }
     }
 
     public static void printCoursesByTeacherId(CourseDAO courseDAO, Long teacherId) {
         List<Course> courses = courseDAO.getCoursesByTeacherId(teacherId);
-        System.out.println("📚 Courses taught by teacher ID " + teacherId + ":");
+        System.out.println(" Courses taught by teacher ID " + teacherId + ":");
         courses.forEach(c -> System.out.println(" - " + c.getCourseName() + ": " + c.getDescription()));
     }
 
 
     public static void printStudentsByTeacherId(StudentDAO studentDAO, Long teacherId) {
         List<Student> students = studentDAO.getStudentsByTeacherId(teacherId);
-        System.out.println("👨‍🏫 Students taught by teacher ID " + teacherId + ":");
+        System.out.println(" Students taught by teacher ID " + teacherId + ":");
         students.forEach(s -> System.out.println(" - " + s.getName() + " (Course: " + s.getCourse().getCourseName() + ")"));
     }
 
